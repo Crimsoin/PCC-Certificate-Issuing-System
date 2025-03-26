@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List - Certificate System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="heading-container">
+            <p class="Head-Title">PCC CERTIFICATE ISSUING SYSTEM</p>
+        </div>
+
+        <div class="top-buttons">
+            <button id="downloadSelected">DOWNLOAD</button>
+            <button id="sendSelected">SEND</button>
+        </div>
+
+        <div class="table-container">
+            <table id="studentTable">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>Student Name</th>
+                        <th>Certificate Type</th>
+                        <th>Hours</th>
+                        <th>Name of BootCamp</th>
+                        <th>Course Started</th>
+                        <th>Course Ended</th>
+                        <th>Name of Instructor</th>
+                        <th>Date Issued</th>
+                        <th>Payment Status</th>
+                        <th>Certificate Status</th>
+                        <th>Student Email</th>
+                        <th>View</th>
+                        <th>Send</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                    <!-- Rows will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bottom-info">
+            <div class="statistics">
+                <p>No. of Students: <span id="totalStudents">0</span></p>
+                <p>|</p>
+                <p>Pending Certificates: <span id="pendingCertificates">0</span></p>
+                <p>|</p>
+                <p>Approved Certificates: <span id="approvedCertificates">0</span></p>
+                <p>|</p>
+                <p>Issued Certificates: <span id="issuedCertificates">0</span></p>
+                <p>|</p>
+                <p>On Hold Certificates: <span id="onHoldCertificates">0</span></p>
+            </div>
+            
+            <!-- Signature Upload Section -->
+            <div class="signature-upload">
+                
+                <label for="signatureUpload">Upload Instructor Signature (PNG):</label>
+                <input type="file" id="signatureUpload" accept="image/png">
+                <button id="uploadSignature">Upload Signature</button>
+                <button id="removeSignature" style="display: none;">Remove Signature</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal (Popup) -->
+    <div id="certificateModal" class="modal">
+        <div class="modal-content">
+            
+            <span class="close">&times;</span>
+            <button id="downloadButton" class="download-button">Download</button>
+            <div id="certificateContent" class="certificate-container">
+                <p id="certificateTitle">CERTIFICATE</p>
+                <p class="certificate-subtitle">
+                    <span>OF</span> 
+                    <span id="certificateType">[CetificateType]</span>
+                </p>
+                <div class="details-details-acknowledge">This acknowledges that</div>
+                <p id="studentName">[StudentName]</p>
+
+                <div class="durationCompleted">
+                    <span id="text1">has successfully completed  </span> 
+                    <span id="hoursCompleted">[Hours]</span>
+                    <span id="text2">  hours of training and course requirements of</span>
+                </div>
+                <p id="bootcampName">[BootCampName]</p>
+
+                <div class="details-period">
+                    <span>Learning Period:</span>
+                    <span id="startDate">[StartDate]</span>
+                    <span> to </span>
+                    <span id="endDate">[EndDate]</span>
+                </div>
+
+                <div class="details-issued">
+                    <span>Given this</span>
+                    <span id="dateIssued">[DateIssued].</span>
+                </div>
+
+                <div class="signature-container">
+                    <div class="signature">
+                        <img src="{{ url_for('static', filename='images/signature-instructor.png') }}" alt="Instructor Signature" class="signature-image">
+                        <span class="signature-name" id="instructorName">[InstructorName]</span>
+                        <div class="signature-title">INSTRUCTOR</div>
+                    </div>
+                    <div class="signature">
+                        <img src="{{ url_for('static', filename='images/signature-ceo.png') }}" alt="CEO Signature" class="signature-image">
+                        <span class="signature-name">Dr. Gabriel Avelino Sampedro</span>
+                        <div class="signature-title">FOUNDER/CEO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sendConfirmationModal" class="sendConfirmationModal">
+        <div class="send-confirmation-modal-content">
+            <p>Are you sure you want to send the certificate to <span id="recipientEmail"></span>?</p>
+            <button id="proceedButton">Proceed</button>
+            <button id="cancelButton">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>
