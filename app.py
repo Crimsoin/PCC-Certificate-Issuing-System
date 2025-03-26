@@ -111,4 +111,4 @@ def send_certificate():
 
 # Run the app (should always be at the bottom)
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
