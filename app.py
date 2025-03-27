@@ -13,6 +13,12 @@ import json
 # Load environment variables from .env file
 load_dotenv()
 
+# Add logging to verify environment variables
+logging.info(f"SERVICE_ACCOUNT_JSON is {'set' if os.getenv('SERVICE_ACCOUNT_JSON') else 'not set'}")
+logging.info(f"SHEET_ID is {'set' if os.getenv('SHEET_ID') else 'not set'}")
+logging.info(f"EMAIL_ADDRESS is {'set' if os.getenv('EMAIL_ADDRESS') else 'not set'}")
+logging.info(f"EMAIL_PASSWORD is {'set' if os.getenv('EMAIL_PASSWORD') else 'not set'}")
+
 app = Flask(__name__)
 CORS(app)  # Enable CORS for API calls
 
