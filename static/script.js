@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     console.log("Fetching student data...");
 
-    const API_URL = "http://127.0.0.1:5000/get-certificate-data";
-    const EMAIL_API_URL = "http://127.0.0.1:5000/send-certificate"; // Updated email API endpoint
+    const BASE_URL = window.location.origin; // Dynamically gets the current origin
+    const API_URL = `${BASE_URL}/get-certificate-data`;
+    const EMAIL_API_URL = `${BASE_URL}/send-certificate`;
     const CERTIFICATE_TYPES = {
         COMPLETION: "completion",
         PARTICIPATION: "participation"
