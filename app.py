@@ -67,8 +67,13 @@ def home():
 # Route to fetch data from Google Sheets
 @app.route("/get-certificate-data", methods=["GET"])
 def get_certificate_data():
-    data = sheet.get_all_records()  # Fetch all rows as a list of dictionaries
-    return jsonify(data)
+    try:
+        data = sheet.get_all_records()  # Fetch all rows as a list of dictionaries
+        logging.info(f"Fetched data: {data}")
+        return jsonify(data)
+    except Exception as e:
+        logging.error(f"Error fetching data from Google Sheets: {str(e)}")
+        return jsonify({"error": "Failed to fetch data"}), 500
 
 # Route to serve static files (for images, CSS, etc.)
 @app.route('/static/<path:filename>')
