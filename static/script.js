@@ -563,24 +563,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // Debug Modal Logic
-    document.getElementById("Debug").addEventListener("click", function () {
-        const modal = document.getElementById("debugModal");
-        modal.style.display = "block";
-    });
-
-    document.querySelector(".modal .close").addEventListener("click", function () {
-        const modal = document.getElementById("debugModal");
-        modal.style.display = "none";
-    });
-
-    window.addEventListener("click", function (event) {
-        const modal = document.getElementById("debugModal");
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-
     function updateButtonStates() {
         const instructorSignatureUploaded = !!sessionStorage.getItem("uploadedSignature");
         const studentCheckboxes = document.querySelectorAll(".student-checkbox");
@@ -651,4 +633,3 @@ document.addEventListener("DOMContentLoaded", async function () {
     initializeSelectAllFunctionality();
     handleSignatureUpload();
 });
-
