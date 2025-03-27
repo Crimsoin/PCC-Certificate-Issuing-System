@@ -62,8 +62,7 @@ logging.basicConfig(level=logging.DEBUG)
 # Route to serve index.html
 @app.route("/")
 def home():
-    SERVICE_ACCOUNT_JSON = os.getenv("SERVICE_ACCOUNT_JSON")  # Load the email address from environment variables
-    return render_template("index.html", SERVICE_ACCOUNT_JSON=SERVICE_ACCOUNT_JSON)
+    return render_template("index.html")
 
 # Route to fetch data from Google Sheets
 @app.route("/get-certificate-data", methods=["GET"])
