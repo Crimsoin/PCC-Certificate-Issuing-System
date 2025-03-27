@@ -33,12 +33,12 @@ if not service_account_json:
 
 try:
     creds_data = json.loads(service_account_json)
-except json.JSONDecodeError as e:
-    logging.error("Invalid JSON in SERVICE_ACCOUNT_JSON: %s", str(e))
+    CREDS = Credentials.from_service_account_info(creds_data, scopes=SCOPE)
+    client = gspread.authorize(CREDS)
+    logging.info("Google Sheets API authenticated successfully")
+except Exception as e:
+    logging.error(f"Error authenticating with Google Sheets API: {str(e)}")
     raise
-
-CREDS = Credentials.from_service_account_info(json.loads(service_account_json), scopes=SCOPE)
-client = gspread.authorize(CREDS)
 
 # Google Sheets ID
 SHEET_ID = os.getenv("SHEET_ID")
